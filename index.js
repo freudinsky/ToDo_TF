@@ -1,3 +1,10 @@
+// Offene ToDos: 
+//Check-Boxen => bei Done CSS Class für Done + in 2. UL verschieben
+//CSS/Design
+//Animationen und anderer Stuff der mir noch spontan so einfällt
+
+// HTML-Elemente in JS-Variablen verpacken
+
 const form = document.querySelector("#todo-form");
 const ulToDo = document.querySelector("#todo-ul");
 const ulComplete = document.querySelector("#complete-ul")
@@ -39,6 +46,7 @@ function deleteToDo(id) {
 function toggleDone(id) {
     toDos
 }
+
 // Todos hinzufügen
 
 function addNewToDo(name) {
@@ -66,6 +74,7 @@ form.addEventListener("submit", (click) => {
 });
 
 // Delete-Button
+
 ulToDo.addEventListener("click", (event) => {
     if (event.target.classList.contains("delete-todo")){
         const parent = event.target.parentElement;
