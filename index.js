@@ -19,10 +19,14 @@ let toDos = [
 
 // Local Storage-Stuff -> local storage kann keine Arrays etc. speichern, daher muss das in JSON-Formatierung umgewandelt werden
 
-const localToDos = localStorage.getItem("ToDos")
-	? JSON.parse(localStorage.getItem("ToDos"))
-	: [...toDos];
-localToDos.forEach((item) => renderList(item));
+const localToDos = JSON.parse(localStorage.getItem("ToDos")) ?? [...toDos];
+localToDos.forEach((item) => {
+	renderList(item);
+	if (item.completed === true) {
+		const check = document.querySelector(`#check-${item.id}`);
+		check.checked = true;
+	}
+});
 
 // Liste rendern
 
@@ -31,23 +35,40 @@ function renderList(todo) {
 	const li = document.createElement("li");
 	li.setAttribute("class", `completed-${completed}`);
 	li.setAttribute("id", todo.id);
-	li.innerHTML = `<input type="checkbox" id="${todo.id}">
-    <label for="${todo.id}"><p>${todo.name}</p></label>
+	li.innerHTML = `<input type="checkbox" class="check" id="check-${todo.id}">
+    <label for="check-${todo.id}"><p>${todo.name}</p></label>
     <button class="delete-todo">Delete</button>`;
 
-	ulToDo.append(li); // if/else für completed/non completed-aufteilung
+	if (todo.completed === false) {
+		ulToDo.append(li);
+	} else if (todo.completed === true) {
+		ulComplete.append(li);
+	}
 }
 
 // Delete + Done
 
-function deleteToDo(id) {
+function deleteToDo(id, list) {
 	toDos = toDos.filter((item) => item.id !== Number(id));
 	localStorage.clear();
 	localStorage.setItem("ToDos", JSON.stringify(toDos));
 	const li = document.getElementById(id);
-	ulToDo.removeChild(li);
+	list.removeChild(li);
 }
-function toggleDone(id) {}
+function toggleDone(id) {
+	const complToDo = localToDos.findIndex((item) => item.id === Number(id));
+	localToDos[complToDo].completed = !localToDos[complToDo].completed;
+	localStorage.clear();
+	localStorage.setItem("ToDos", JSON.stringify(localToDos));
+	const li = document.getElementById(id);
+	if (localToDos[complToDo].completed) {
+		ulComplete.append(li);
+		ulToDo.removeChild(li);
+	} else if (!localToDos[complToDo].completed) {
+		ulToDo.append(li);
+		ulComplete.removeChild(li);
+	}
+}
 
 // Todos hinzufügen
 
@@ -85,12 +106,28 @@ ulToDo.addEventListener("click", (event) => {
 	}
 });
 
+ulComplete.addEventListener("click", (event) => {
+	if (event.target.classList.contains("delete-todo")) {
+		const parent = event.target.parentElement;
+		const id = parent.getAttribute("id");
+		deleteToDo(id, ulComplete);
+	}
+});
+
 // Completed-Checkbox
 
 ulToDo.addEventListener("click", (event) => {
-	if (event.target.classList.contains("completed-false")) {
+	if (event.target.classList.contains("check")) {
 		const parent = event.target.parentElement;
 		const id = parent.getAttribute("id");
-		deleteToDo(id);
+		toggleDone(id);
+	}
+});
+
+ulComplete.addEventListener("click", (event) => {
+	if (event.target.classList.contains("check")) {
+		const parent = event.target.parentElement;
+		const id = parent.getAttribute("id");
+		toggleDone(id);
 	}
 });
