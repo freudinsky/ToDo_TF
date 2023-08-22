@@ -105,7 +105,7 @@ ulToDo.addEventListener("click", (event) => {
 	if (event.target.classList.contains("delete-todo")) {
 		const parent = event.target.parentElement;
 		const id = parent.getAttribute("id");
-		deleteToDo(id);
+		deleteToDo(id, ulToDo);
 	}
 });
 
