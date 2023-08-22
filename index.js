@@ -15,7 +15,7 @@ let toDos = [
 
 // Local Storage-Stuff -> local storage kann keine Arrays etc. speichern, daher muss das in JSON-Formatierung umgewandelt werden
 
-const localToDos = JSON.parse(localStorage.getItem("ToDos")) ?? [...toDos];
+let localToDos = JSON.parse(localStorage.getItem("ToDos")) ?? [...toDos];
 localToDos.forEach((item) => {
 	renderList(item);
 	if (item.completed === true) {
