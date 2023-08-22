@@ -1,19 +1,15 @@
-// Offene ToDos:
-//Check-Boxen => bei Done CSS Class für Done + in 2. UL verschieben
-//CSS/Design
-//Animationen und anderer Stuff der mir noch spontan so einfällt
-
 // HTML-Elemente in JS-Variablen verpacken
 
 const form = document.querySelector("#todo-form");
 const ulToDo = document.querySelector("#todo-ul");
 const ulComplete = document.querySelector("#complete-ul");
+const complH2 = document.querySelector("#completed-h2");
 
 // To-Do Liste selbst
 
 let toDos = [
 	{ name: "Godzilla waschen", completed: false, id: 111 },
-	{ name: "Saufen", completed: false, id: 222 },
+	{ name: "Strand staubsaugen", completed: false, id: 222 },
 	{ name: "Shoppen gehen", completed: false, id: 333 },
 ];
 
@@ -27,7 +23,6 @@ localToDos.forEach((item) => {
 		check.checked = true;
 	}
 });
-
 // Liste rendern
 
 function renderList(todo) {
@@ -44,14 +39,23 @@ function renderList(todo) {
 	} else if (todo.completed === true) {
 		ulComplete.append(li);
 	}
+	complHeadHide();
+}
+
+function complHeadHide() {
+	if (ulComplete.innerHTML === "") {
+		complH2.style.display = "none";
+	} else if (ulComplete.innerHTML !== "") {
+		complH2.style.display = "block";
+	}
 }
 
 // Delete + Done
 
 function deleteToDo(id, list) {
-	toDos = toDos.filter((item) => item.id !== Number(id));
+	localToDos = localToDos.filter((item) => item.id !== Number(id));
 	localStorage.clear();
-	localStorage.setItem("ToDos", JSON.stringify(toDos));
+	localStorage.setItem("ToDos", JSON.stringify(localToDos));
 	const li = document.getElementById(id);
 	list.removeChild(li);
 }
@@ -78,8 +82,8 @@ function addNewToDo(name) {
 		completed: false,
 		id: Date.now(),
 	};
-	toDos.push(newToDo);
-	localStorage.setItem("ToDos", JSON.stringify(toDos));
+	localToDos.push(newToDo);
+	localStorage.setItem("ToDos", JSON.stringify(localToDos));
 	renderList(newToDo);
 }
 
@@ -93,7 +97,6 @@ form.addEventListener("submit", (click) => {
 		input.value = "";
 		input.focus();
 	}
-	console.log(toDos);
 });
 
 // Delete-Button
@@ -131,3 +134,7 @@ ulComplete.addEventListener("click", (event) => {
 		toggleDone(id);
 	}
 });
+
+// Conditional Rendering der H2 der "Completed-Liste"
+
+document.addEventListener("click", () => complHeadHide());

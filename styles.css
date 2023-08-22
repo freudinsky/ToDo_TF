@@ -1,0 +1,87 @@
+html,
+body {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 1rem;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+	background-color: azure;
+}
+
+.wrapper {
+	width: 45%;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	flex-direction: column;
+	background-color: white;
+	border-radius: 15px;
+	box-shadow: 0 0 10px rgb(180, 180, 180);
+	padding: 1.5rem;
+}
+li > input.check  {
+	width: 50px;
+	height: 50px;
+	background-color: aqua;
+}
+#todo-form {
+	width: 90%;
+	text-align: center;
+	margin: 0 0 2rem 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+ul {
+	padding: 0;
+	width: 90%;
+	margin-bottom: 0;
+}
+#complete-ul {
+	margin-bottom: 1.5rem;
+}
+li {
+	height: 3rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: solid 1px rgb(215, 215, 215);
+	border-radius: 10px;
+	margin: 5px 0;
+}
+
+.check {
+	justify-self: left;
+	width: 10%;
+}
+.delete-todo {
+	justify-self: right;
+	width: 20%;
+}
+li > p {
+	width: 70%;
+}
+button,
+.delete-todo {
+	text-align: center;
+	width: 7rem;
+	height: 2rem;
+	margin: 1rem;
+	padding: 0.5rem 2rem;
+	border-radius: 10px;
+	border: none;
+	background-color: rgba(67, 177, 189, 0.812);
+	transition: background-color, 500ms;
+}
+button:hover,
+.delete-todo:hover {
+	background-color: rgba(50, 127, 135, 0.812);
+}
+#todo-input {
+	height: 2rem;
+	width: 80%;
+	border-radius: 30px;
+	border: solid 1px rgb(215, 215, 215);
+	text-indent: 1rem;
+}
