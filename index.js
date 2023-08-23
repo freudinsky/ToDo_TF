@@ -15,7 +15,7 @@ let toDos = [
 
 // Local Storage-Stuff -> local storage kann keine Arrays etc. speichern, daher muss das in JSON-Formatierung umgewandelt werden
 
-let localToDos = JSON.parse(localStorage.getItem("ToDos")) ?? [...toDos];
+const localToDos = JSON.parse(localStorage.getItem("ToDos")) ?? [...toDos];
 localToDos.forEach((item) => {
 	renderList(item);
 	if (item.completed === true) {
@@ -42,6 +42,7 @@ function renderList(todo) {
 	complHeadHide();
 }
 
+// Condtional Rendering für Completed H2 -> Funktion für EventListener
 function complHeadHide() {
 	if (ulComplete.innerHTML === "") {
 		complH2.style.display = "none";
@@ -50,7 +51,7 @@ function complHeadHide() {
 	}
 }
 
-// Delete + Done
+// Delete + Done Functions
 
 function deleteToDo(id, list) {
 	localToDos = localToDos.filter((item) => item.id !== Number(id));
@@ -86,6 +87,14 @@ function addNewToDo(name) {
 	localStorage.setItem("ToDos", JSON.stringify(localToDos));
 	renderList(newToDo);
 }
+
+////////////////////////////////////////
+////////////////////////////////////////
+/////////// EventListeners /////////////
+////////////////////////////////////////
+////////////////////////////////////////
+
+// Submit/Create new todo
 
 form.addEventListener("submit", (click) => {
 	click.preventDefault();
