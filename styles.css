@@ -8,7 +8,8 @@ body {
 }
 
 .wrapper {
-	width: 45%;
+	width: 90%;
+	max-width: 900px;
 	margin: auto;
 	display: flex;
 	justify-content: center;
@@ -49,6 +50,8 @@ li {
 	border: solid 1px rgb(215, 215, 215);
 	border-radius: 10px;
 	margin: 5px 0;
+	text-align: center;
+	height: fit-content;
 }
 
 #fox {
@@ -74,8 +77,20 @@ li {
 	justify-self: right;
 	width: 20%;
 }
-li > p {
-	width: 70%;
+li p {
+	width: 90%;
+	
+	padding: 0 10px;
+	text-align: center;
+	height: fit-content;
+}
+label {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 button,
 .delete-todo {
@@ -83,6 +98,7 @@ button,
 	width: 7rem;
 	height: 2rem;
 	margin: 1rem;
+	margin-left: 5px;
 	padding: 0.5rem 2rem;
 	border-radius: 10px;
 	border: none;
@@ -115,7 +131,7 @@ button:active, .delete-todo:active{
 }
 .clear-wrap {
 	width: 90%;
-	margin: auto;;
+	margin: auto;
 	display: flex;
 	justify-content: space-between;
 }
@@ -138,4 +154,30 @@ button:active, .delete-todo:active{
 #complete-ul > li p {
 	text-decoration: line-through;
 	color: gray;
+}
+
+@media screen and (max-width: 720px) {
+	#todo-form {
+		flex-direction: column;
+		padding: 0;
+	}
+	#todo-input, #add-btn {
+		width: 100%;
+		margin: 5px 0;
+	}
+	.delete-todo {
+		width: fit-content;
+		padding: 5px 15px;
+		margin: 5px;
+		margin-right: 10px;
+		margin-left: 0;
+	}
+}
+@media screen and (max-width: 450px) {
+		.check {
+			display: none
+		}
+		label {
+			
+		}
 }

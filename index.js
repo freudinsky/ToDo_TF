@@ -51,6 +51,7 @@ function renderList(todo) {
 	complHeadHide();
 }
 
+
 // Condtional Rendering für Completed H2 -> Funktion für eventListener
 
 function complHeadHide() {
