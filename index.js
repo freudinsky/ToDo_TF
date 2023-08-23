@@ -186,12 +186,17 @@ clearDoneBtn.addEventListener("click", () => clearDone());
 clearOpenBtn.addEventListener("click", () => clearOpen());
 clearAllBtn.addEventListener("click", () => {
 	clearDone();
-	clearOpen()
-})
+	clearOpen();
+});
 
 // Conditional Rendering der H2 der "Completed-Liste"
 
 document.addEventListener("click", () => {
+	complHeadHide();
+	hideClearBtn();
+	hideClearAllBtn();
+});
+form.addEventListener("submit", () => {
 	complHeadHide();
 	hideClearBtn();
 	hideClearAllBtn();
