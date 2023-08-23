@@ -3,18 +3,29 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>To Do List</title>
+		<script src="index.js" defer></script>
+		<link rel="icon" type="image/x-icom" href="assets/favicon.ico" />
+		<link rel="stylesheet" href="styles.css" />
 	</head>
 	<body>
-		<div>
+		<div class="wrapper">
+			<img src="assets/Fox.png" alt="Fox" id="fox" />
+			<h1>To-Do List</h1>
+			<h2>Open To-Dos</h2>
+			<ul id="todo-ul"></ul>
 			<form action="" id="todo-form">
-				<input type="text" name="" id="todo-input" />
+				<input
+					type="text"
+					name=""
+					id="todo-input"
+					placeholder="Your next To-Do"
+					autocomplete="off"
+				/>
 				<button type="submit" id="add-btn">Submit</button>
 			</form>
-			<ul id="todo-ul"></ul>
-
+			<h2 id="completed-h2">Completed To-Dos</h2>
 			<ul id="complete-ul"></ul>
 		</div>
-		<script src="index.js"></script>
 	</body>
 </html>
