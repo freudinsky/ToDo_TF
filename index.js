@@ -4,13 +4,16 @@ const form = document.querySelector("#todo-form");
 const ulToDo = document.querySelector("#todo-ul");
 const ulComplete = document.querySelector("#complete-ul");
 const complH2 = document.querySelector("#completed-h2");
+const clearDoneBtn = document.querySelector(".clear-done");
+const clearOpenBtn = document.querySelector(".clear-open");
+const clearAllBtn = document.querySelector(".clear-all");
 
 // To-Do Liste selbst
 
 let toDos = [
-	{ name: "Godzilla waschen", completed: false, id: 111 },
-	{ name: "Strand staubsaugen", completed: false, id: 222 },
-	{ name: "Shoppen gehen", completed: false, id: 333 },
+	{ name: "Godzilla waschen", completed: false, id: "111" },
+	{ name: "Strand staubsaugen", completed: false, id: "222" },
+	{ name: "Shoppen gehen", completed: false, id: "333" },
 ];
 
 // Local Storage-Stuff -> local storage kann keine Arrays etc. speichern, daher muss das in JSON-Formatierung umgewandelt werden
@@ -47,34 +50,55 @@ function complHeadHide() {
 	if (ulComplete.innerHTML === "") {
 		complH2.style.display = "none";
 		ulComplete.style.display = "none";
+		clearDoneBtn.style.display = "none";
 	} else if (ulComplete.innerHTML !== "") {
 		complH2.style.display = "block";
 		ulComplete.style.display = "block";
+		clearDoneBtn.style.display = "block";
+	}
+}
+
+function hideClearBtn() {
+	if (ulToDo.innerHTML === "") {
+		clearOpenBtn.style.display = "none";
+		clearAllBtn.style.display = "none";
+	} else {
+		clearOpenBtn.style.display = "block";
+		clearAllBtn.style.display = "block";
 	}
 }
 
 // Delete + Done Functions
 
 function deleteToDo(id, list) {
-	localToDos = localToDos.filter((item) => item.id !== Number(id));
+	localToDos = localToDos.filter((item) => item.id !== String(id));
 	localStorage.clear();
 	localStorage.setItem("ToDos", JSON.stringify(localToDos));
 	const li = document.getElementById(id);
 	list.removeChild(li);
 }
 function toggleDone(id) {
-	const complToDo = localToDos.findIndex((item) => item.id === Number(id));
+	const complToDo = localToDos.findIndex((item) => item.id === String(id));
 	localToDos[complToDo].completed = !localToDos[complToDo].completed;
 	localStorage.clear();
 	localStorage.setItem("ToDos", JSON.stringify(localToDos));
 	const li = document.getElementById(id);
-	if (localToDos[complToDo].completed) {
-		ulComplete.append(li);
-		ulToDo.removeChild(li);
-	} else if (!localToDos[complToDo].completed) {
-		ulToDo.append(li);
-		ulComplete.removeChild(li);
-	}
+	localToDos[complToDo].completed ? ulComplete.append(li) : ulToDo.append(li);
+}
+
+function clearDone() {
+	localToDos = localToDos.filter((item) => item.completed === false);
+	localStorage.clear();
+	localStorage.setItem("ToDos", JSON.stringify(localToDos));
+	const complList = document.querySelectorAll("#complete-ul>li");
+	complList.forEach((item) => ulComplete.removeChild(item));
+}
+function clearOpen() {
+	localToDos = localToDos.filter((item) => item.completed === true);
+	localStorage.clear();
+	localStorage.setItem("ToDos", JSON.stringify(localToDos));
+	const complList = document.querySelectorAll("#todo-ul>li");
+	complList.forEach((item) => ulToDo.removeChild(item));
 }
 
 // Todos hinzufügen
@@ -146,6 +170,16 @@ ulComplete.addEventListener("click", (event) => {
 	}
 });
 
+clearDoneBtn.addEventListener("click", () => clearDone());
+clearOpenBtn.addEventListener("click", () => clearOpen());
+clearAllBtn.addEventListener("click", () => {
+	clearDone();
+	clearOpen()
+})
+
 // Conditional Rendering der H2 der "Completed-Liste"
 
-document.addEventListener("click", () => complHeadHide());
+document.addEventListener("click", () => {
+	complHeadHide();
+	hideClearBtn();
+});
