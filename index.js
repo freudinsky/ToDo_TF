@@ -72,6 +72,13 @@ function hideClearBtn() {
 		clearAllBtn.style.display = "block";
 	}
 }
+function hideClearAllBtn() {
+	if (ulToDo.innerHTML === "" && ulComplete.innerHTML === "") {
+		clearAllBtn.style.display = "none";
+	} else {
+		clearAllBtn.style.display = "block";
+	}
+}
 
 // Delete + Done Functions
 
@@ -187,4 +194,5 @@ clearAllBtn.addEventListener("click", () => {
 document.addEventListener("click", () => {
 	complHeadHide();
 	hideClearBtn();
+	hideClearAllBtn();
 });
