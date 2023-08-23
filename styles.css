@@ -52,18 +52,18 @@ li {
 }
 
 #fox {
-    width: 100px;
-    animation: pulse 3s infinite ease-in-out alternate
+	width: 100px;
+	animation: pulse 3s infinite ease-in-out alternate;
 }
 @keyframes pulse {
-    from {
-        scale: 1.0;
-        filter: drop-shadow(0 0 0 rgb(170, 63, 1));
-    }
-    to {
-        scale: 1.05;
-        filter: drop-shadow(0 0 10px rgba(170, 63, 1, 0.554));
-    }
+	from {
+		scale: 1;
+		filter: drop-shadow(0 0 0 rgb(170, 63, 1));
+	}
+	to {
+		scale: 1.05;
+		filter: drop-shadow(0 0 10px rgba(170, 63, 1, 0.554));
+	}
 }
 .check {
 	justify-self: left;
