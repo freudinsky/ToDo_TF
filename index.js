@@ -1,4 +1,4 @@
-// Offene ToDos:
+//Offene ToDos:
 //Check-Boxen => bei Done CSS Class für Done + in 2. UL verschieben
 //CSS/Design
 //Animationen und anderer Stuff der mir noch spontan so einfällt
@@ -72,7 +72,6 @@ form.addEventListener("submit", (click) => {
 		input.value = "";
 		input.focus();
 	}
-	console.log(toDos);
 });
 
 // Delete-Button
