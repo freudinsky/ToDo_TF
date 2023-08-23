@@ -35,10 +35,12 @@ localToDos.forEach((item) => {
 function renderList(todo) {
 	const completed = todo.completed ? "y" : "n";
 	const li = document.createElement("li");
+	const text = todo.name.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+// Verhindert, dass eventueller HTML-Code aus dem Input als solcher erkannt und interpretiert wird
 	li.setAttribute("class", `completed-${completed}`);
 	li.setAttribute("id", todo.id);
 	li.innerHTML = `<input type="checkbox" class="check" id="check-${todo.id}">
-    <label for="check-${todo.id}"><p>${todo.name}</p></label>
+    <label for="check-${todo.id}"><p>${text}</p></label>
     <button class="delete-todo">Delete</button>`;
 
 	if (todo.completed === false) {
