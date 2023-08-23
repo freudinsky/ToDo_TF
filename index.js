@@ -1,3 +1,6 @@
+// Anstehende Optimierungen:
+// - if/elses einkürzen -> bei multiline den multiline-code in fn mit dyn parametern
+
 // HTML-Elemente in JS-Variablen verpacken
 
 const form = document.querySelector("#todo-form");
@@ -8,7 +11,7 @@ const clearDoneBtn = document.querySelector(".clear-done");
 const clearOpenBtn = document.querySelector(".clear-open");
 const clearAllBtn = document.querySelector(".clear-all");
 
-// To-Do Liste selbst
+// Default-ToDos, falls im Local Storage noch nichts angelegt wurde
 
 let toDos = [
 	{ name: "Godzilla waschen", completed: false, id: "111" },
@@ -16,17 +19,18 @@ let toDos = [
 	{ name: "Shoppen gehen", completed: false, id: "333" },
 ];
 
-// Local Storage-Stuff -> local storage kann keine Arrays etc. speichern, daher muss das in JSON-Formatierung umgewandelt werden
+// eigentliches ToDo-Listen-Array & Local Storage-Stuff -> local storage kann keine Arrays etc. speichern, daher muss das in JSON-Formatierung umgewandelt werden
 
 let localToDos = JSON.parse(localStorage.getItem("ToDos")) ?? [...toDos];
 localToDos.forEach((item) => {
 	renderList(item);
 	if (item.completed === true) {
 		const check = document.querySelector(`#check-${item.id}`);
-		check.checked = true;
+		check.checked = true; // Setzt nach Reload den Erledigt-Haken bei erledigten Aufgaben
 	}
 });
-// Liste rendern
+
+// li-Elemente rendern
 
 function renderList(todo) {
 	const completed = todo.completed ? "y" : "n";
@@ -45,7 +49,8 @@ function renderList(todo) {
 	complHeadHide();
 }
 
-// Condtional Rendering für Completed H2 -> Funktion für EventListener
+// Condtional Rendering für Completed H2 -> Funktion für eventListener
+
 function complHeadHide() {
 	if (ulComplete.innerHTML === "") {
 		complH2.style.display = "none";
