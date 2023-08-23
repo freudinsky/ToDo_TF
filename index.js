@@ -144,6 +144,9 @@ form.addEventListener("submit", (click) => {
 		input.value = "";
 		input.focus();
 	}
+	complHeadHide();
+	hideClearBtn();
+	hideClearAllBtn();
 });
 
 // Delete-Button
@@ -192,11 +195,6 @@ clearAllBtn.addEventListener("click", () => {
 // Conditional Rendering der H2 der "Completed-Liste"
 
 document.addEventListener("click", () => {
-	complHeadHide();
-	hideClearBtn();
-	hideClearAllBtn();
-});
-form.addEventListener("submit", () => {
 	complHeadHide();
 	hideClearBtn();
 	hideClearAllBtn();
