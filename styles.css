@@ -53,6 +53,7 @@ li {
 
 #fox {
 	width: 100px;
+    margin: 0.75rem;
 	animation: pulse 3s infinite ease-in-out alternate;
 }
 @keyframes pulse {

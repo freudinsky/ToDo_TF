@@ -46,8 +46,10 @@ function renderList(todo) {
 function complHeadHide() {
 	if (ulComplete.innerHTML === "") {
 		complH2.style.display = "none";
+		ulComplete.style.display = "none";
 	} else if (ulComplete.innerHTML !== "") {
 		complH2.style.display = "block";
+		ulComplete.style.display = "block";
 	}
 }
 
@@ -81,7 +83,7 @@ function addNewToDo(name) {
 	const newToDo = {
 		name: name,
 		completed: false,
-		id: Date.now(),
+		id: crypto.randomUUID(),
 	};
 	localToDos.push(newToDo);
 	localStorage.setItem("ToDos", JSON.stringify(localToDos));
