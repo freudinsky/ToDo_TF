@@ -47,7 +47,6 @@ function renderList(todo) {
 	}
 	complHeadHide();
 }
-
 function checkMark(item) {
 	const check = document.querySelector(`#check-label-${item.id}`);
 	if (item.completed === true && check.classList.contains("label-checkbox")) {
@@ -60,8 +59,6 @@ function checkMark(item) {
 		
 		// Setzt nach Reload den Erledigt-Haken bei erledigten Aufgaben
 	}
-
-
 // Condtional Rendering für Completed H2 -> Funktion für eventListener
 
 function complHeadHide() {
