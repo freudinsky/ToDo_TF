@@ -7,6 +7,9 @@ body {
 	background-color: azure;
 	overflow-x: hidden;
 }
+:root {
+	--content-width: 90%;
+}
 
 .wrapper {
 	width: 90%;
@@ -29,17 +32,21 @@ li > input.check  {
 	background-color: aqua;
 }
 #todo-form {
-	width: 75%;
+	width: var(--content-width);
 	text-align: center;
 	margin: 0 0 2rem 0;
-	padding-left: 1rem;
+	padding: 0 1rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
+#todo-input {
+	margin: 1rem;
+	margin-right: 0.5rem;
+}
 ul {
 	padding: 0;
-	width: 75%;
+	width: var(--content-width);
 	margin-bottom: 0;
 }
 
@@ -107,35 +114,40 @@ li p {
 
 button,
 .delete-todo {
-	text-align: center;
-	width: 7rem;
-	height: 2rem;
 	margin: 1rem;
 	margin-left: 5px;
 	padding: 0.5rem 2rem;
-	border-radius: 10px;
 	border: none;
-	background-color: rgba(67, 177, 189, 0.812);
-	transition: background-color, 500ms;
 }
 .delete-todo {
 	justify-self: right;
+	border-radius: 100px;
 	width: 40px;
 	height: 40px;
 	aspect-ratio: 1/1;
 	padding: 0.5rem;
-	background-color: rgba(185, 90, 2, 0.75);
+	background-color: rgba(182, 0, 0, 0.9);
 	background-image: url(assets/erase.svg);
 	background-repeat: no-repeat;
-	background-size:auto;
+	background-size: auto;
 	background-position: center;
 	transition: background-color, 500ms;
 }
-#add-btn,
-.clearbtn {
-	border-radius: 50px;
+#add-btn {
+	width: 55px;
+	height: 55px;
+	padding: 1rem;
+	border-radius: 100px;
+	margin: 1rem;
+	margin-left: 0.5rem;
+	background-image: url(assets/add.svg);
+	background-repeat: no-repeat;
+	background-size: 35px 35px;
+	background-position: center;
+	background-color: rgba(67, 177, 189, 0.812);
+	transition: background-color, 500ms;
 }
-button:hover{
+button:hover {
 	background-color: rgba(50, 127, 135, 0.812);
 	box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.302);
 	transition: box-shadow, 150ms;
@@ -144,6 +156,7 @@ button:active {
 	box-shadow: inset 1px 1px 50px 50px rgba(218, 218, 218, 0.715);
 }
 .clearbtn {
+	border-radius: 50px;
 	width: fit-content;
 	height: fit-content;
 	align-self: flex-start;
@@ -153,13 +166,13 @@ button:active {
 	margin: 0;
 	transition: background-color, 500ms;
 }
-.clearbtn:hover, .delete-todo:hover {
+.clearbtn:hover {
 	background-color: rgb(185, 90, 2);
 	box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.302);
 	transition: box-shadow, 150ms;
 }
 .clear-wrap {
-	width: 75%;
+	width: var(--content-width);
 	margin: auto;
 	display: flex;
 	justify-content: space-between;
@@ -168,7 +181,8 @@ button:active {
 	background-color: rgba(182, 0, 0, 0.75);
 	transition: background-color, 500ms;
 }
-.clear-all:hover {
+.clear-all:hover,
+.delete-todo:hover {
 	background-color: rgba(182, 0, 0, 1);
 	box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.302);
 }
@@ -189,36 +203,41 @@ button:active {
 
 @media screen and (max-width: 729px) {
 	#todo-form {
-		flex-direction: column;
 		padding: 0;
-		width: 90%;
+		margin: 0;
+		width: 95%;
 	}
-	.clear-wrap, ul{
-		width: 90%;
+	#todo-input {
+		margin-left: 0;
 	}
-	#todo-input,
 	#add-btn {
-		width: 100%;
-		margin: 5px 0;
+		margin-right: 0;
+	}
+	.clear-wrap,
+	ul {
+		width: 95%;
 	}
 }
-@media screen and (max-width: 450px){
-body, html {
-	overflow-x: hidden;
-	padding: 0;
-	background-color: white;
-}
+@media screen and (max-width: 450px) {
+	body,
+	html {
+		overflow-x: hidden;
+		padding: 0;
+		background-color: white;
+	}
 	.wrapper {
-	max-width: 95vw;
-	margin: 0;
-	left: 0;
-	top: 0;
-	border-radius: 0;
-	box-shadow: none;
-}
-#todo-form, ul, .clear-wrap {
-	width: 95%;
-}
+		max-width: 95vw;
+		margin: 0;
+		left: 0;
+		top: 0;
+		border-radius: 0;
+		box-shadow: none;
+	}
+	#todo-form,
+	ul,
+	.clear-wrap {
+		width: 95%;
+	}
 }
 
 .checkbox {
