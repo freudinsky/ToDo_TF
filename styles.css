@@ -199,7 +199,7 @@ button:active {
 }
 @media screen and (max-width: 450px){
 body, html {
-	overflow: hidden;
+	overflowx: hidden;
 	padding: 0;
 }
 	.wrapper {
