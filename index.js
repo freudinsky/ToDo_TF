@@ -24,10 +24,7 @@ let toDos = [
 let localToDos = JSON.parse(localStorage.getItem("ToDos")) ?? [...toDos];
 localToDos.forEach((item) => {
 	renderList(item);
-	if (item.completed === true) {
-		const check = document.querySelector(`#check-${item.id}`);
-		check.checked = true; // Setzt nach Reload den Erledigt-Haken bei erledigten Aufgaben
-	}
+	checkMark(item)
 });
 
 // li-Elemente rendern
@@ -39,8 +36,8 @@ function renderList(todo) {
 // Verhindert, dass eventueller HTML-Code aus dem Input als solcher erkannt und interpretiert wird
 	li.setAttribute("class", `completed-${completed}`);
 	li.setAttribute("id", todo.id);
-	li.innerHTML = `<input type="checkbox" class="check" id="check-${todo.id}">
-    <label for="check-${todo.id}"><p>${text}</p></label>
+	li.innerHTML = `<label for="check-${todo.id}" class="label-checkbox check" id="check-label-${todo.id}"><input type="checkbox" class=" checkbox" id="check-${todo.id}"></label>
+    <label for="check-${todo.id}" class="label-text check"><p>${text}</p></label>
     <button class="delete-todo">Delete</button>`;
 
 	if (todo.completed === false) {
@@ -50,6 +47,19 @@ function renderList(todo) {
 	}
 	complHeadHide();
 }
+
+function checkMark(item) {
+	const check = document.querySelector(`#check-label-${item.id}`);
+	if (item.completed === true && check.classList.contains("label-checkbox")) {
+		check.classList.remove("label-checkbox");
+		check.classList.add("label-checkbox-checked")
+	}else if(item.completed === false && check.classList.contains("label-checkbox-checked")){
+		check.classList.remove("label-checkbox-checked")
+		check.classList.add("label-checkbox")
+	}
+		
+		// Setzt nach Reload den Erledigt-Haken bei erledigten Aufgaben
+	}
 
 
 // Condtional Rendering für Completed H2 -> Funktion für eventListener
@@ -99,6 +109,7 @@ function toggleDone(id) {
 	localStorage.setItem("ToDos", JSON.stringify(localToDos));
 	const li = document.getElementById(id);
 	localToDos[complToDo].completed ? ulComplete.append(li) : ulToDo.append(li);
+	checkMark(localToDos[complToDo])
 }
 
 function clearDone() {
@@ -185,6 +196,7 @@ ulComplete.addEventListener("click", (event) => {
 		const parent = event.target.parentElement;
 		const id = parent.getAttribute("id");
 		toggleDone(id);
+
 	}
 });
 
