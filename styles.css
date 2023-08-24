@@ -206,12 +206,15 @@ button:active {
 body, html {
 	overflow-x: hidden;
 	padding: 0;
+	background-color: white;
 }
 	.wrapper {
-	max-width: 97vw;
+	max-width: 95vw;
 	margin: 0;
 	left: 0;
-	top: 0
+	top: 0;
+	border-radius: 0;
+	box-shadow: none;
 }
 #todo-form, ul, .clear-wrap {
 	width: 95%;
