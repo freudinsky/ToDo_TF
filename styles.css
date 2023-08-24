@@ -5,11 +5,12 @@ body {
 	padding: 1rem;
 	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 	background-color: azure;
+	overflow-x: hidden;
 }
 
 .wrapper {
 	width: 90%;
-	max-width: 900px;
+	max-width: 600px;
 	margin: auto;
 	display: flex;
 	justify-content: center;
@@ -28,7 +29,7 @@ li > input.check  {
 	background-color: aqua;
 }
 #todo-form {
-	width: 90%;
+	width: 75%;
 	text-align: center;
 	margin: 0 0 2rem 0;
 	padding-left: 1rem;
@@ -38,7 +39,7 @@ li > input.check  {
 }
 ul {
 	padding: 0;
-	width: 90%;
+	width: 75%;
 	margin-bottom: 0;
 }
 
@@ -69,10 +70,7 @@ li {
 		filter: drop-shadow(0 0 10px rgba(170, 63, 1, 0.554));
 	}
 }
-.delete-todo {
-	justify-self: right;
-	width: 20%;
-}
+
 li p {
 	width: fit-content;
 	padding: 0 10px;
@@ -120,18 +118,24 @@ button,
 	background-color: rgba(67, 177, 189, 0.812);
 	transition: background-color, 500ms;
 }
+.delete-todo {
+	justify-self: right;
+	width: fit-content;
+	height: fit-content;
+	padding: 0.5rem;
+	background-color: rgba(185, 90, 2, 0.75);
+	transition: background-color, 500ms;
+}
 #add-btn,
 .clearbtn {
 	border-radius: 50px;
 }
-button:hover,
-.delete-todo:hover {
+button:hover{
 	background-color: rgba(50, 127, 135, 0.812);
 	box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.302);
 	transition: box-shadow, 150ms;
 }
-button:active,
-.delete-todo:active {
+button:active {
 	box-shadow: inset 1px 1px 50px 50px rgba(218, 218, 218, 0.715);
 }
 .clearbtn {
@@ -142,21 +146,26 @@ button:active,
 	color: #fff;
 	font-weight: 600;
 	margin: 0;
+	transition: background-color, 500ms;
 }
-.clearbtn:hover {
+.clearbtn:hover, .delete-todo:hover {
 	background-color: rgb(185, 90, 2);
+	box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.302);
+	transition: box-shadow, 150ms;
 }
 .clear-wrap {
-	width: 90%;
+	width: 75%;
 	margin: auto;
 	display: flex;
 	justify-content: space-between;
 }
 .clear-all {
 	background-color: rgba(182, 0, 0, 0.75);
+	transition: background-color, 500ms;
 }
 .clear-all:hover {
 	background-color: rgba(182, 0, 0, 1);
+	box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.302);
 }
 #todo-input {
 	height: 2rem;
@@ -173,23 +182,35 @@ button:active,
 	color: gray;
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 729px) {
 	#todo-form {
 		flex-direction: column;
 		padding: 0;
+		width: 90%;
+	}
+	.clear-wrap, ul{
+		width: 90%;
 	}
 	#todo-input,
 	#add-btn {
 		width: 100%;
 		margin: 5px 0;
 	}
-	.delete-todo {
-		width: fit-content;
-		padding: 5px 15px;
-		margin: 5px;
-		margin-right: 10px;
-		margin-left: 0;
-	}
+}
+@media screen and (max-width: 450px){
+body, html {
+	overflow: hidden;
+	padding: 0;
+}
+	.wrapper {
+	width: 100%;
+	margin: 0;
+	left: 0;
+	top: 0
+}
+#todo-form, ul, .clear-wrap {
+	width: 95%;
+}
 }
 
 .checkbox {

@@ -38,7 +38,7 @@ function renderList(todo) {
 	li.setAttribute("id", todo.id);
 	li.innerHTML = `<label for="check-${todo.id}" class="label-checkbox check" id="check-label-${todo.id}"><input type="checkbox" class=" checkbox" id="check-${todo.id}"></label>
     <label for="check-${todo.id}" class="label-text check"><p>${text}</p></label>
-    <button class="delete-todo">Delete</button>`;
+    <button class="delete-todo"><img src="assets/erase.svg"></button>`;
 
 	if (todo.completed === false) {
 		ulToDo.append(li);
